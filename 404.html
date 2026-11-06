@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Golden Numbers Intranet</title>
+    <!--
+      Fallback SPA per a GitHub Pages: no hi ha servidor que reescrigui rutes,
+      així que si l'usuari entra directament a /alguna-ruta GitHub Pages serveix
+      aquest 404.html. Aquí codifiquem la ruta a la querystring i redirigim a
+      index.html; el fragment corresponent a index.html la descodifica i la
+      restaura amb pushState abans que arrenqui el router.
+      Basat en el patró spa-github-pages (rafgraph/spa-github-pages).
+      pathSegmentsToKeep = quants segments de la ruta són la BASE: 1 amb
+      GitHub Pages de projecte (/<nom-del-repo>/) i 0 a l'arrel d'un domini
+      propi. El número d'aquí sota NO s'edita a mà: el build el substitueix
+      per la base real (plugin `gn-fallback-spa` a vite.config.js).
+    -->
+    <script>
+      var pathSegmentsToKeep = 0
+      var l = window.location
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      )
+    </script>
+  </head>
+  <body></body>
+</html>
