@@ -1,0 +1,1 @@
+function e(){window.print()}export{e as t};
